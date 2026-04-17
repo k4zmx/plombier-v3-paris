@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Services from '../components/Services.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Reviews from '../components/Reviews.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Plombier Urgence Paris 24h/24 — Intervention 30 min | Plombier Test';
+const description = "Plombier en urgence à Paris et Île-de-France. Intervention en 30 minutes, devis gratuit, tarifs transparents. Dépannage, débouchage, fuite, chauffe-eau. Appelez 09 70 70 45 59.";
+const keywords = "plombier paris, plombier urgence paris, plombier 24h/24, plombier paris pas cher, plombier île-de-france, dépannage plomberie paris, artisan plombier paris, fuite eau paris";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "Plombier Test",
+  "description": description,
+  "url": "https://www.example.com/",
+  "telephone": "+33970704559",
+  "image": "https://www.example.com/fuites.webp",
+  "priceRange": "€€",
+  "areaServed": [
+    { "@type": "City", "name": "Paris" },
+    { "@type": "AdministrativeArea", "name": "Île-de-France" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Paris",
+    "addressRegion": "Île-de-France",
+    "postalCode": "75001",
+    "addressCountry": "FR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 48.8566, "longitude": 2.3522 },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "87",
+    "bestRating": "5"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services de plomberie",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Détection de fuites" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Débouchage canalisations" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Chauffage & chauffe-eau" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dépannage en urgence" } }
+    ]
+  }
+};
+---
+
+<Layout {title} {description} {keywords} {schema} preloadImage="/depannage.webp">
+  <Navbar />
+  <main>
+    <Hero />
+    <Marquee />
+    <Services />
+    <WhyUs />
+    <Reviews />
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

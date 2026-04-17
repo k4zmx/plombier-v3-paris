@@ -1,0 +1,260 @@
+---
+const items = [
+  {
+    num: '1',
+    title: 'Intervention en 30 minutes',
+    desc: "Nos techniciens sont géolocalisés en temps réel. Chaque seconde compte.",
+    stat: '30',
+    unit: 'min',
+    color: 'featured',
+  },
+  {
+    num: '2',
+    title: 'Prix annoncé avant tout travail',
+    desc: "Devis clair sur place. Jamais de facturation surprise après coup.",
+    stat: '0',
+    unit: '€ caché',
+    color: 'white',
+  },
+  {
+    num: '3',
+    title: 'Plombier qualifié et assuré',
+    desc: "Assurance RC Pro incluse sur chaque intervention. Zéro risque.",
+    stat: '100',
+    unit: '% assuré',
+    color: 'red',
+  },
+  {
+    num: '4',
+    title: 'Résultat garanti',
+    desc: "On travaille jusqu'à obtenir le résultat attendu. Garantie incluse.",
+    stat: '2',
+    unit: 'ans garantie',
+    color: 'white',
+  },
+];
+---
+
+<section class="why" id="pourquoi">
+  <div class="container">
+    <div class="why-header reveal">
+      <span class="section-label">■ POURQUOI NOUS</span>
+      <h2>4 raisons de nous<br />faire <span class="highlight">confiance</span>.</h2>
+    </div>
+
+    <div class="why-list">
+      {items.map((item, i) => (
+        <div class={`why-row why-row--${item.color}${i === 0 ? ' why-row--featured' : ''} reveal reveal-delay-${i + 1}`}>
+          <div class="why-big-num">{item.num}</div>
+          <div class="why-content">
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+          <div class="why-stat">
+            <span class="why-stat-num">{item.stat}</span>
+            <span class="why-stat-unit">{item.unit}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    padding: var(--section-pad) 0;
+    background: var(--cream);
+    border-bottom: var(--border);
+  }
+
+  .why-header {
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  .why-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-transform: uppercase;
+  }
+
+  .highlight {
+    background: var(--yellow);
+    padding: 0 12px;
+    border: var(--border);
+    display: inline-block;
+    box-shadow: var(--shadow);
+  }
+
+  /* ── List rows ── */
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .why-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    padding: 28px;
+    background: var(--white);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .why-row:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0 0 var(--black);
+  }
+
+  /* ── Big number box ── */
+  .why-big-num {
+    width: 96px;
+    height: 96px;
+    border: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 0 0 var(--black);
+  }
+
+  .why-row--white .why-big-num { background: var(--black); color: var(--yellow); }
+  .why-row--red {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+  .why-row--red .why-big-num { background: var(--red); color: var(--white); }
+  .why-row--red .why-stat { border-left-color: var(--white); }
+  .why-row--red .why-stat-unit { color: rgba(255,255,255,0.7); }
+  .why-row--red .why-content p { color: rgba(255,255,255,0.8); }
+
+  /* Featured row — bigger, yellow bg */
+  .why-row--featured {
+    background: var(--yellow);
+    padding: 36px 32px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .why-row--featured .why-big-num {
+    background: var(--black);
+    color: var(--yellow);
+    width: 108px;
+    height: 108px;
+    font-size: 72px;
+  }
+
+  .why-row--featured .why-content h3 {
+    font-size: clamp(26px, 3.5vw, 34px);
+  }
+
+  .why-row--featured .why-stat {
+    border-left-color: var(--black);
+  }
+
+  /* ── Content ── */
+  .why-content h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .why-content p {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  /* ── Stat ── */
+  .why-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-left: 24px;
+    border-left: var(--border);
+    flex-shrink: 0;
+  }
+
+  .why-stat-num {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .why-stat-unit {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    color: var(--ink);
+  }
+
+  @media (max-width: 768px) {
+    .why { padding: 56px 0; }
+    .why-header { margin-bottom: 36px; }
+
+    .why-list { gap: 12px; }
+
+    .why-row {
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      padding: 18px;
+      border-width: 2px;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+
+    .why-big-num {
+      width: 56px;
+      height: 56px;
+      font-size: 36px;
+      border-width: 2px;
+      box-shadow: 3px 3px 0 0 var(--black);
+    }
+
+    .why-content h3 { font-size: 18px; line-height: 1.15; margin-bottom: 4px; }
+    .why-content p { font-size: 13px; line-height: 1.55; }
+
+    .why-stat {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 10px;
+      padding-left: 0;
+      padding-top: 14px;
+      margin-top: 4px;
+      border-left: none;
+      border-top: 2px solid var(--black);
+    }
+
+    .why-stat-num { font-size: 28px; }
+    .why-stat-unit { margin-top: 0; font-size: 11px; }
+
+    .why-row:hover {
+      transform: none;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+
+  }
+</style>

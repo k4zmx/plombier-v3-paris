@@ -1,0 +1,273 @@
+---
+const services = [
+  {
+    num: '01',
+    icon: '<path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>',
+    title: 'Détection de Fuites',
+    desc: "Technologies modernes pour localiser rapidement l'origine des fuites, visibles ou cachées.",
+    color: 'white',
+  },
+  {
+    num: '02',
+    icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    title: 'Débouchage Canalisations',
+    desc: 'Outils professionnels pour éliminer les obstructions : débris, racines, calcaire.',
+    color: 'yellow',
+  },
+  {
+    num: '03',
+    icon: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+    title: 'Chauffage & Chauffe-eau',
+    desc: "Installation, entretien et réparation de chaudières, radiateurs et chauffe-eau.",
+    color: 'white',
+  },
+  {
+    num: '04',
+    icon: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+    title: 'Dépannage en Urgence',
+    desc: 'Chaque minute compte. Diagnostic rapide et résolution efficace.',
+    color: 'red',
+  },
+];
+---
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="section-label">■ NOS SERVICES</span>
+      <h2>Ce qu'on fait,<br />on le fait <span class="highlight">bien</span>.</h2>
+      <p>Urgences, installations, réparations — toute la plomberie dont vous avez besoin.</p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s, i) => (
+        <article class={`svc-card svc-card--${s.color} reveal reveal-delay-${(i % 4) + 1}`}>
+          <div class="svc-num">{s.num}</div>
+          <div class="svc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={s.icon} />
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+          <div class="svc-arrow" aria-hidden="true">→</div>
+        </article>
+      ))}
+    </div>
+
+    <div class="services-cta reveal">
+      <a href="/services" class="btn-view-all">
+        Voir tous nos services
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: var(--section-pad) 0;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    background: var(--white);
+    position: relative;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .services-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .highlight {
+    background: var(--yellow);
+    padding: 0 10px;
+    border: var(--border);
+    display: inline-block;
+    box-shadow: var(--shadow);
+  }
+
+  .services-header p {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── Grid ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  /* ── Card ── */
+  .svc-card {
+    position: relative;
+    padding: 28px 24px;
+    border: var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .svc-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0 0 var(--black);
+  }
+
+  .svc-card--yellow { background: var(--yellow); }
+  .svc-card--white { background: var(--white); }
+  .svc-card--red { background: var(--red); color: var(--white); }
+
+  .svc-num {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: var(--font-heading);
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.15;
+    letter-spacing: -0.04em;
+  }
+
+  .svc-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--black);
+    color: var(--white);
+    border: var(--border-thin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .svc-card--red .svc-icon {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .svc-card h3 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .svc-card p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .svc-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--black);
+    color: var(--white);
+    border: var(--border-thin);
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 900;
+    transition: transform 0.2s ease;
+  }
+
+  .svc-card--red .svc-arrow {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .svc-card:hover .svc-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── CTA ── */
+  .services-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px 32px;
+    border: var(--border);
+    box-shadow: var(--shadow);
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-view-all:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 var(--black);
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  }
+
+  @media (max-width: 640px) {
+    .services { padding: 56px 0; }
+
+    .services-header { margin-bottom: 36px; }
+    .services-header p { font-size: 14px; }
+
+    .services-grid { grid-template-columns: 1fr; gap: 14px; }
+
+    .svc-card {
+      padding: 22px 20px;
+      border-width: 2px;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+    .svc-card:hover {
+      transform: none;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+
+    .svc-num { font-size: 56px; top: 8px; right: 12px; }
+    .svc-icon { width: 44px; height: 44px; margin-bottom: 18px; }
+    .svc-icon svg { width: 26px; height: 26px; }
+    .svc-card h3 { font-size: 19px; }
+    .svc-card p { font-size: 13px; margin-bottom: 16px; }
+    .svc-arrow { width: 32px; height: 32px; font-size: 18px; }
+
+
+    .btn-view-all {
+      font-size: 14px;
+      padding: 14px 24px;
+      border-width: 2px;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+    .btn-view-all:hover {
+      transform: none;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+  }
+</style>

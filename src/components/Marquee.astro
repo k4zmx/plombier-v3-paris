@@ -1,0 +1,83 @@
+---
+---
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="m-item"><span class="m-star">★</span> 4.5 sur Google</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">1000+ interventions</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Intervention en 30 min</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Paris & Île-de-France</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Disponible 24h/24</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Devis gratuit</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item"><span class="m-star">★</span> 4.5 sur Google</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">1000+ interventions</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Intervention en 30 min</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Paris & Île-de-France</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Disponible 24h/24</span>
+    <span class="m-sep">✕</span>
+    <span class="m-item">Devis gratuit</span>
+    <span class="m-sep">✕</span>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    background: var(--black);
+    color: var(--yellow);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    overflow: hidden;
+    padding: 12px 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    white-space: nowrap;
+    animation: m-scroll 35s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes m-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .m-item {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .m-star { color: var(--yellow); }
+
+  .m-sep {
+    color: var(--yellow);
+    font-size: 14px;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .marquee { padding: 10px 0; }
+    .m-item { font-size: 13px; }
+    .marquee-track { gap: 20px; }
+  }
+</style>

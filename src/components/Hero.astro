@@ -1,0 +1,459 @@
+---
+---
+
+<section class="hero" id="accueil">
+  <div class="hero-grid container">
+    <div class="hero-left">
+      <div class="hero-status reveal">
+        <span class="status-dot" aria-hidden="true"></span>
+        Disponible maintenant
+      </div>
+
+      <h1 class="hero-title reveal reveal-delay-1">
+        <span class="hero-stroke">PLOMBIER</span><br />
+        <span class="hero-underline">EN URGENCE</span><br />
+        À PARIS.
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        Fuite d'eau, canalisation bouchée ou panne de chauffe-eau ? On arrive en moins de 30 minutes. Devis gratuit, zéro surprise.
+      </p>
+
+      <div class="hero-cta-row reveal reveal-delay-3">
+        <a href="tel:09 70 70 45 59" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          09 70 70 45 59
+        </a>
+        <a href="/contact" class="btn btn-secondary">
+          Devis gratuit →
+        </a>
+      </div>
+
+      <!-- Stat boxes -->
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="stat-box">
+          <span class="stat-num" data-target="30">0</span>
+          <span class="stat-label">min chrono</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" data-target="1000">0</span>
+          <span class="stat-suffix">+</span>
+          <span class="stat-label">interventions</span>
+        </div>
+        <div class="stat-box stat-box--highlight">
+          <span class="stat-num">4.5</span>
+          <span class="stat-label">★★★★★ google</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right reveal reveal-delay-2">
+      <div class="hero-image-wrap">
+        <img src="/depannage.webp" alt="Plombier professionnel en intervention à Paris — dépannage plomberie urgence 24h/24" width="600" height="400" fetchpriority="high" decoding="async" />
+        <div class="hero-image-tag">
+          <span class="hero-tag-num">39€</span>
+          <span class="hero-tag-sub">Déplacement</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-checklist">
+          <div class="check-item">
+            <div class="check-box" aria-hidden="true">✓</div>
+            <span>Intervention 30 min</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box" aria-hidden="true">✓</div>
+            <span>Devis annoncé avant</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box" aria-hidden="true">✓</div>
+            <span>Plombier assuré</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box" aria-hidden="true">✓</div>
+            <span>Garantie incluse</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateCounters() {
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const target = parseInt(el.dataset.target || '0', 10);
+          const duration = 1500;
+          const start = performance.now();
+          function tick(now: number) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target).toLocaleString('fr-FR');
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          observer.unobserve(el);
+        });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach((c) => observer.observe(c));
+  }
+  animateCounters();
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 60px 0 80px;
+  }
+
+  /* ── Grid ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding-top: 40px;
+  }
+
+  /* ── Status ── */
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: var(--black);
+    padding: 6px 14px;
+    border: var(--border-thin);
+    box-shadow: 3px 3px 0 0 var(--black);
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 28px;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--black);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+  }
+
+  /* ── Title ── */
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 9vw, 100px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+
+  .hero-underline {
+    position: relative;
+    background: var(--yellow);
+    padding: 0 10px;
+    display: inline-block;
+    border: var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .hero-stroke {
+    -webkit-text-stroke: 2px var(--black);
+    color: transparent;
+    display: inline-block;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.65;
+    color: var(--black);
+    max-width: 480px;
+    margin-bottom: 32px;
+  }
+
+  /* ── Buttons ── */
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 800;
+    padding: 16px 28px;
+    text-transform: uppercase;
+    border: var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 var(--black);
+  }
+
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--black);
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .btn-secondary {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  /* ── Stats ── */
+  .hero-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px 18px;
+    border: var(--border);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-box { background: var(--white); }
+  .stat-box--highlight { background: var(--yellow); }
+
+  .stat-num {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-suffix {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  /* ── Right ── */
+  .hero-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Image block with yellow offset shadow */
+  .hero-image-wrap {
+    position: relative;
+    border: var(--border);
+    box-shadow: 10px 10px 0 0 var(--yellow), 10px 10px 0 2px var(--black);
+    overflow: hidden;
+  }
+
+  .hero-image-wrap img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-image-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--red);
+    color: var(--white);
+    padding: 10px 16px;
+    border: var(--border);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .hero-tag-num {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  .hero-tag-sub {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    opacity: 0.85;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+  }
+
+  .hero-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .check-box {
+    width: 24px; height: 24px;
+    background: var(--green);
+    border: var(--border-thin);
+    font-family: var(--font-heading);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  /* ══════════════ TABLET ══════════════ */
+  @media (max-width: 900px) {
+    .hero { padding: 0 0 48px; }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding-top: 24px;
+    }
+
+    .hero-title { font-size: clamp(42px, 10vw, 64px); }
+    .hero-sub { font-size: 15px; margin-bottom: 24px; }
+
+    .hero-cta-row { flex-direction: column; width: 100%; gap: 12px; }
+    .btn { justify-content: center; width: 100%; font-size: 16px; padding: 14px 20px; }
+
+    .hero-stats { gap: 10px; }
+    .stat-box { min-width: 100px; padding: 12px 14px; }
+    .stat-num { font-size: 30px; }
+  }
+
+  /* ══════════════ MOBILE ══════════════ */
+  @media (max-width: 640px) {
+    .hero { padding: 0 0 40px; }
+
+    .hero-grid {
+      gap: 36px;
+      padding-top: 8px;
+    }
+
+    .hero-status {
+      font-size: 11px;
+      padding: 5px 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 12vw, 52px);
+      line-height: 0.9;
+      margin-bottom: 18px;
+    }
+
+    .hero-underline {
+      padding: 0 8px;
+      border-width: 2px;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      font-size: 15px;
+      padding: 14px 18px;
+      border-width: 2px;
+      box-shadow: 4px 4px 0 0 var(--black);
+    }
+
+    .btn:hover {
+      box-shadow: 4px 4px 0 0 var(--black);
+      transform: none;
+    }
+
+    /* Stats: 2+1 layout on mobile */
+    .hero-stats { gap: 8px; }
+    .stat-box {
+      flex: 1 1 calc(50% - 4px);
+      min-width: 0;
+      padding: 10px 12px;
+      border-width: 2px;
+      box-shadow: 3px 3px 0 0 var(--black);
+    }
+    .stat-num { font-size: 26px; }
+    .stat-label { font-size: 10px; }
+
+    /* Right card */
+    .hero-card {
+      box-shadow: 6px 6px 0 0 var(--black);
+    }
+    .hero-card-body { padding: 20px 18px; }
+    .price-amount { font-size: 38px; }
+    .price-label { font-size: 13px; }
+    .check-item { font-size: 13px; gap: 10px; }
+    .check-box { width: 22px; height: 22px; font-size: 12px; }
+
+  }
+
+  @media (max-width: 380px) {
+    .hero-title { font-size: clamp(32px, 11vw, 44px); }
+  }
+</style>

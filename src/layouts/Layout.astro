@@ -1,0 +1,198 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  keywords?: string;
+  ogImage?: string;
+  schema?: object;
+  preloadImage?: string;
+}
+
+const SITE_URL = 'https://www.example.com';
+const SITE_NAME = 'Plombier Test';
+const DEFAULT_OG = '/fuites.webp';
+
+const {
+  title,
+  description,
+  canonical,
+  keywords = 'plombier paris, plombier urgence, dépannage plomberie, plombier 24h/24, plombier île-de-france, fuite eau, débouchage canalisation, chauffe-eau',
+  ogImage = DEFAULT_OG,
+  schema,
+  preloadImage,
+} = Astro.props;
+
+const pageUrl = canonical || new URL(Astro.url.pathname, SITE_URL).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+
+// Default LocalBusiness schema
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": SITE_NAME,
+  "description": "Plombier en urgence à Paris et Île-de-France. Intervention rapide 24h/24 et 7j/7.",
+  "url": SITE_URL,
+  "telephone": "+33970704559",
+  "image": `${SITE_URL}${DEFAULT_OG}`,
+  "areaServed": [
+    { "@type": "City", "name": "Paris" },
+    { "@type": "AdministrativeArea", "name": "Île-de-France" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Paris",
+    "addressRegion": "Île-de-France",
+    "postalCode": "75001",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 48.8566,
+    "longitude": 2.3522
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "€€",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "87",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": []
+};
+
+const finalSchema = schema || defaultSchema;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Primary Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={SITE_NAME} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="geo.region" content="FR-75" />
+    <meta name="geo.placename" content="Paris" />
+    <meta name="geo.position" content="48.8566;2.3522" />
+    <meta name="ICBM" content="48.8566, 2.3522" />
+    <meta name="theme-color" content="#fde047" />
+    <meta name="format-detection" content="telephone=yes" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={pageUrl} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="fr" href={pageUrl} />
+    <link rel="alternate" hreflang="x-default" href={pageUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Performance: Resource hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Preload critical hero image if page-specific -->
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+    <!-- Non-blocking fonts -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scroll reveal (deferred, tiny, accessibility-aware) -->
+    <script>
+      (function() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+          return;
+        }
+        const els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(el => observer.observe(el));
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #000; }
+  ::-webkit-scrollbar-thumb { background: #fde047; border: 2px solid #000; }
+
+  section[id] { scroll-margin-top: 80px; }
+
+  /* Content-visibility for below-the-fold perf */
+  section:not(.hero):not(.svc-hero):not(.c-hero) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
+  @media (max-width: 768px) {
+    section[id] { scroll-margin-top: 64px; }
+  }
+</style>

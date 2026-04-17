@@ -1,0 +1,65 @@
+---
+---
+
+<div class="callbar" role="banner">
+  <div class="callbar-inner">
+    <div class="callbar-marquee">
+      <div class="callbar-track">
+        <span class="callbar-item">★ Intervention en 30 min</span>
+        <span class="callbar-item">★ Paris & Île-de-France</span>
+        <span class="callbar-item">★ Devis gratuit</span>
+        <span class="callbar-item">★ 24h/24 · 7j/7</span>
+        <span class="callbar-item">★ Déplacement dès 39 €</span>
+        <span class="callbar-item">★ Plombier assuré</span>
+        <span class="callbar-item">★ Intervention en 30 min</span>
+        <span class="callbar-item">★ Paris & Île-de-France</span>
+        <span class="callbar-item">★ Devis gratuit</span>
+        <span class="callbar-item">★ 24h/24 · 7j/7</span>
+        <span class="callbar-item">★ Déplacement dès 39 €</span>
+        <span class="callbar-item">★ Plombier assuré</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .callbar {
+    background: var(--black);
+    color: var(--yellow);
+    border-bottom: var(--border);
+    height: 36px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .callbar-inner { width: 100%; overflow: hidden; }
+
+  .callbar-track {
+    display: flex;
+    gap: 40px;
+    white-space: nowrap;
+    animation: callbar-scroll 40s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes callbar-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .callbar-item {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .callbar { height: 32px; }
+    .callbar-item { font-size: 12px; }
+  }
+</style>
